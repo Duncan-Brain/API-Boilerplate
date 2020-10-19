@@ -1,0 +1,20 @@
+{
+  "name": "api-boilerplate-frontend",
+  "version": "0.1.0",
+  "description": "Frontend of api-boilerplate",
+  "main":"index.js",
+  "scripts": {
+    "start": "next start",
+    "build": "next build",
+    "dev": "next"
+  },
+  "author": "Duncan-Brain",
+  "private": true,
+  "dependencies": {
+    "next": "^9.5.5",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
+    "semantic-ui-css": "^2.4.1",
+    "semantic-ui-react": "^2.0.0"
+  }
+}

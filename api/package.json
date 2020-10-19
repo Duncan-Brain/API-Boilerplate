@@ -1,0 +1,19 @@
+{
+  "name": "api-boilerplate-api",
+  "version": "0.1.0",
+  "description": "Boilerplate API Server",
+  "scripts": {
+    "dev": "nodemon",
+    "start": "node index.js"
+  },
+  "author": "Duncan-Brain",
+  "private": true,
+  "dependencies": {
+    "express": "4.17.1",
+    "body-parser": "1.19.0",
+    "cors": "2.8.5"
+  },
+  "devDependencies": {
+    "nodemon": "2.0.5"
+  }
+}

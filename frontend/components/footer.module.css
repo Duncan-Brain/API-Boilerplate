@@ -1,0 +1,20 @@
+.iconLeft {
+    float: none !important;
+    margin-right: 2em !important;
+}
+
+.iconNoShadow {
+  box-shadow: none !important;
+}
+
+.horizontalTextAlign {
+  display: flex;
+  align-items: center
+}
+
+.borderColorNone{
+  background-color: transparent !important;
+  border: none !important;
+  border-left: none !important;
+  box-shadow: none !important;
+}

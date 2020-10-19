@@ -1,0 +1,7 @@
+html, body {background-color: #f0efefff;}
+
+.horizontalLine {
+  border: 0 none;
+  height: 0.15em;
+  background-color: #22242626;
+}
