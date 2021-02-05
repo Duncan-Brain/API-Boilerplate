@@ -4,32 +4,26 @@ Basic Node Express REST API that serves some data from a local JSON data file. U
 ## Getting Started
 ### Build Local Images
 Install Docker Desktop.
-
-Run:
+```
 $ docker-compose build
-
+```
 OPTIONAL Check:
-
-Run: 
+``` 
 $docker-compose up
-
-GoTo Browser:
-localhost:3050
-
-Run:
+```
+Visit: [localhost:3050]
+```
 $ Docker stop CONTAINERNAMEHERE
-
+```
 ### Build Local Node Cluster
 Enable Kubernetes in Docker Desktop
 
-Build NGINX Ingress Controller [https://kubernetes.github.io/ingress-nginx/deploy/#provider-specific-steps]: 
+Build NGINX Ingress Controller [https://kubernetes.github.io/ingress-nginx/deploy/#provider-specific-steps] then build API-Boilerplate Node.
+```
 $ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.44.0/deploy/static/provider/cloud/deploy.yaml
-
-Build API Boilerplate Node:
 $ kubectl apply -f k8s
-
-GoTo Browser:
-localhost
+```
+Visit[localhost]
 
 ## Style Guide
 Frontend - https://github.com/airbnb/javascript/tree/master/react
