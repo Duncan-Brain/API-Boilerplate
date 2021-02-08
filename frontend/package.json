@@ -2,10 +2,11 @@
   "name": "api-boilerplate-frontend",
   "version": "0.1.0",
   "description": "Frontend of api-boilerplate",
-  "main":"index.js",
+  "main": "index.js",
   "scripts": {
     "start": "next start",
     "build": "next build",
+    "test": "jest",
     "dev": "next"
   },
   "author": "Duncan-Brain",
@@ -16,5 +17,18 @@
     "react-dom": "^16.14.0",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^2.0.0"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.12.13",
+    "@babel/preset-react": "^7.12.13",
+    "babel-jest": "^26.6.3",
+    "jest": "^26.6.3",
+    "react-test-renderer": "^17.0.1"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(css|less)$": "<rootDir>/__mocks__/styleMock.js"
+    }
   }
 }
