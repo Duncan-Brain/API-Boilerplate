@@ -4,6 +4,8 @@ Basic Node Express REST API that serves some data from a local JSON data file. U
 ## Getting Started
 Clone repository.
 
+## DEVELOPMENT
+
 ### Build Local Images
 Install Docker Desktop.
 ```
