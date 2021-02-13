@@ -6,8 +6,8 @@
   "scripts": {
     "start": "next start",
     "build": "next build",
-    "test": "jest",
-    "dev": "next"
+    "dev": "next dev",
+    "test": "jest"
   },
   "author": "Duncan-Brain",
   "private": true,
@@ -24,11 +24,5 @@
     "babel-jest": "^26.6.3",
     "jest": "^26.6.3",
     "react-test-renderer": "^17.0.1"
-  },
-  "jest": {
-    "moduleNameMapper": {
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
-      "\\.(css|less)$": "<rootDir>/__mocks__/styleMock.js"
-    }
   }
 }

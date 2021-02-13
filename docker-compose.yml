@@ -23,9 +23,6 @@ services:
     build:
       dockerfile: Dockerfile.dev
       context: ./frontend
-    volumes:
-      - /app/node_modules
-      - /app/.next
-      - ./frontend:/app
+
     environment:
       - CHOKIDAR_USEPOLLING=true

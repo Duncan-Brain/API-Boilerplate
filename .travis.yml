@@ -1,0 +1,26 @@
+sudo: required
+services:
+  - docker
+env:
+  global:
+    - SHA=$(git rev-parse HEAD)
+
+before_install:
+  - docker build -t TEMPIMAGE -f ./frontend/Dockerfile.next ./frontend
+
+script:
+  - docker run TEMPIMAGE npm run test -- --coverage
+
+after_success:
+  - docker build -t duncanbrain/boiler-api-frontend:latest -t duncanbrain/boiler-api-frontend:$SHA -f ./frontend/Dockerfile.next ./frontend
+  - docker build -t duncanbrain/boiler-api-nginx:latest -t duncanbrain/boiler-api-nginx:$SHA -f ./nginx/Dockerfile ./nginx
+  - docker build -t duncanbrain/boiler-api-api:latest -t duncanbrain/boiler-api-api:$SHA -f ./api/Dockerfile ./api
+  # Log in to the docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # Take those images and push them to docker hub
+  - docker push duncanbrain/boiler-api-frontend:latest
+  - docker push duncanbrain/boiler-api-nginx:latest
+  - docker push duncanbrain/boiler-api-api:latest
+  - docker push duncanbrain/boiler-api-frontend:$SHA
+  - docker push duncanbrain/boiler-api-nginx:$SHA
+  - docker push duncanbrain/boiler-api-api:$SHA

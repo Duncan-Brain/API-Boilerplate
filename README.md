@@ -11,8 +11,8 @@ Install Docker Desktop.
 ```
 $ docker-compose build
 ```
-#### OPTIONAL - Browser Test 
-``` 
+#### OPTIONAL - Browser Test
+```
 $docker-compose up
 ```
 Visit: [localhost:3050](http://localhost:3050)
@@ -39,3 +39,4 @@ Frontend - https://github.com/airbnb/javascript/tree/master/react
 
 ## References
 [1 - https://kubernetes.github.io/ingress-nginx/deploy/#provider-specific-steps](https://kubernetes.github.io/ingress-nginx/deploy/#provider-specific-steps)
+[2 - Jest/Next setup https://levelup.gitconnected.com/configuring-jest-for-next-js-react-and-babel-from-scratch-bb3b7751329b](https://levelup.gitconnected.com/configuring-jest-for-next-js-react-and-babel-from-scratch-bb3b7751329b)
