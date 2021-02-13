@@ -6,7 +6,7 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm ci
 COPY . .
-RUN npm build
+RUN ["node_modules/.bin/next", "build"]
 
 FROM node:alpine
 WORKDIR /app
