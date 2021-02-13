@@ -9,7 +9,7 @@ before_install:
   - docker build -t tempimage -f ./frontend/Dockerfile.next ./frontend
 
 script:
-  - docker run tempimage npm run test -- --coverage
+  - docker run -e CI=true tempimage npm run test -- --coverage
 
 after_success:
   - docker build -t duncanbrain/boiler-api-frontend:latest -t duncanbrain/boiler-api-frontend:$SHA -f ./frontend/Dockerfile.next ./frontend
