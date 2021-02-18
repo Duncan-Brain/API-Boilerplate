@@ -11,6 +11,8 @@ before_install:
   - source $HOME/google-cloud-sdk/path.bash.inc
   - gcloud components update kubectl
   - export KUBECONFIG=$KUBECONFIG:config-travisci-sa
+  - kubectl config view --flatten
+  - kubectl config use-context do-tor1-k8s-test-boiler
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   - docker build -t tempimage -f ./frontend/Dockerfile.dev ./frontend
 
