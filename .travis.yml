@@ -10,6 +10,7 @@ before_install:
   - curl https://sdk.cloud.google.com | bash > /dev/null;
   - source $HOME/google-cloud-sdk/path.bash.inc
   - gcloud components update kubectl
+  - find $HOME -type d -name ".kube"
   - export KUBECONFIG=$KUBECONFIG:config-travisci-sa
   - kubectl config view --flatten > ~/.kube/config
   - kubectl config use-context do-tor1-k8s-test-boiler
