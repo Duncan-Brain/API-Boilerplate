@@ -8,5 +8,5 @@ docker push duncanbrain/boiler-api-frontend:$SHA
 docker push duncanbrain/boiler-api-api:$SHA
 
 kubectl --kubeconfig=$HOME/.kube/config apply -f k8s
-kubectl --kubeconfig=$HOME/.kube/config set image deployment/frontend-deployment frontend=tempfrontend
-kubectl --kubeconfig=$HOME/.kube/config set image deployment/api-deployment api=tempapi
+kubectl --kubeconfig=$HOME/.kube/config set image deployment/frontend-deployment frontend-deployment=tempfrontend
+kubectl --kubeconfig=$HOME/.kube/config set image deployment/api-deployment api-deployment=tempapi
