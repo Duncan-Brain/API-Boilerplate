@@ -7,6 +7,6 @@ docker push duncanbrain/boiler-api-api:latest
 docker push duncanbrain/boiler-api-frontend:$SHA
 docker push duncanbrain/boiler-api-api:$SHA
 
-kubectl --kubeconfig=$HOME/.kube/config apply -f k8s
-kubectl --kubeconfig=$HOME/.kube/config set image deployments/frontend-deployment frontend=duncanbrain/boiler-api-frontend:$SHA
-kubectl --kubeconfig=$HOME/.kube/config set image deployments/api-deployment api=duncanbrain/boiler-api-api:$SHA
+kubectl apply -f k8s
+kubectl set image deployments/frontend-deployment frontend=duncanbrain/boiler-api-frontend:$SHA
+kubectl set image deployments/api-deployment api=duncanbrain/boiler-api-api:$SHA

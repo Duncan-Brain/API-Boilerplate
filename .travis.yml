@@ -9,11 +9,10 @@ before_install:
   - openssl aes-256-cbc -K $encrypted_85d538ae2fd5_key -iv $encrypted_85d538ae2fd5_iv -in config-travisci-sa.enc -out config-travisci-sa -d
   - curl -LO https://dl.k8s.io/release/v1.20.0/bin/linux/amd64/kubectl
   - sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
-  - kubectl version --client
   - mkdir $HOME/.kube
   - export KUBECONFIG=$KUBECONFIG:config-travisci-sa
   - kubectl config view --flatten > $HOME/.kube/config
-  - kubectl config use-context do-tor1-k8s-test-boiler
+  - kubectl config set-context --current --user=travisci-sa
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   - docker build -t tempimage -f ./frontend/Dockerfile.dev ./frontend
 
