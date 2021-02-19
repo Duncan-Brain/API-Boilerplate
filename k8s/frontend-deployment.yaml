@@ -15,5 +15,6 @@ spec:
       containers:
         - name: frontend
           image: boilerplate/frontend
+          imagePullPolicy: Never
           ports:
             - containerPort: 3000

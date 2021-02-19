@@ -15,5 +15,6 @@ spec:
       containers:
         - name: api
           image: boilerplate/api
+          imagePullPolicy: Never
           ports:
             - containerPort: 5000
