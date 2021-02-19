@@ -15,5 +15,6 @@ spec:
       containers:
         - name: api
           image: duncanbrain/boiler-api-api
+          imagePullPoicy: Always
           ports:
             - containerPort: 5000
