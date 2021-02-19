@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: api
-          image: boilerplate/api
+          image: duncanbrain/boiler-api-api
           imagePullPolicy: Never
           ports:
             - containerPort: 5000
