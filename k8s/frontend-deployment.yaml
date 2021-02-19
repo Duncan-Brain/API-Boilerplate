@@ -15,6 +15,6 @@ spec:
       containers:
         - name: frontend
           image: duncanbrain/boiler-api-frontend
-          imagePullPolicy: Never
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 3000
