@@ -15,6 +15,7 @@ spec:
       containers:
         - name: api
           image: duncanbrain/boiler-api-api
-          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 5000
+      imagePullSecrets:
+        - name: regcred
