@@ -3,14 +3,14 @@ kind: Deployment
 metadata:
   name: frontend-deployment
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
-      component: frontend
+      component: web
   template:
     metadata:
       labels:
-        component: frontend
+        component: web
     spec:
       containers:
         - name: frontend
