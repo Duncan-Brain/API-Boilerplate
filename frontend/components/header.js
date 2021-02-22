@@ -10,7 +10,7 @@ class Header extends React.Component {
         <Container>
           <Menu secondary className={styles.menuMargin}>
             <Menu.Item>
-              <Image src="/public/images/favicon.ico" alt="Main Logo" fluid />
+              <Image src="/images/favicon.ico" alt="Main Logo" fluid />
             </Menu.Item>
             <Menu.Item>
               This is an API Boilerplate

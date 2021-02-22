@@ -29,7 +29,7 @@ class Main extends React.Component {
                 <Segment>
                   <Image
                     size="medium"
-                    src="/public/images/roozbeh-eslami-YlVjrBkfXt8-unsplash.jpg"
+                    src="/images/roozbeh-eslami-YlVjrBkfXt8-unsplash.jpg"
                   />
                 </Segment>
                 </Segment.Group>
