@@ -1,14 +1,12 @@
-name: actions
+name: Test Deploy
 on:
   push:
     branches:
       - master
 
 jobs:
-  - name: Setup and Test
+  test-deploy:
     runs-on: ubuntu-latest
-    services:
-
     steps:
       - name: Check Out Repo
         uses: actions/checkout@v2
@@ -30,7 +28,6 @@ jobs:
           kubectl config set-context --current --user=travisci-sa
 
       - name: Build and Test Frontend
-        uses:
         run: |
           docker build -t tempimage -f ./frontend/Dockerfile.dev ./frontend
           docker run tempimage npm test -- --coverage
