@@ -12,7 +12,6 @@
   "author": "Duncan-Brain",
   "private": true,
   "dependencies": {
-
     "next": "^10.0.7",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
@@ -22,7 +21,7 @@
   "devDependencies": {
     "@babel/preset-env": "^7.12.13",
     "@babel/preset-react": "^7.12.13",
-    "babel-jest": "^25.5.x",
-    "jest": "^25.5.x"
+    "babel-jest": "^26.6.3",
+    "jest": "^26.6.3"
   }
 }
