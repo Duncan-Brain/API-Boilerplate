@@ -11,6 +11,7 @@ module.exports = {
     "**/?(*.)+(spec|test).[jt]s?(x)"
   ],
   testPathIgnorePatterns: [
+    '/.next/',
     '/node_modules/',
     '/testconfig/'
   ],
