@@ -23,7 +23,7 @@ jobs:
 
       - name: Setup Kubeconfig
         run: |
-          export KUBECONFIG=$KUBECONFIG:/.kube/config-travisci-sa
+          export KUBECONFIG=$KUBECONFIG:$HOME/.kube/config-travisci-sa
           kubectl config view --flatten > $HOME/.kube/config
           kubectl config set-context --current --user=travisci-sa
 
