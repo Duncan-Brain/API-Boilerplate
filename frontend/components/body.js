@@ -1,5 +1,6 @@
 import React from 'react';
-import {Divider, Card, Image, Container, Segment} from 'semantic-ui-react';
+import OptImage from 'next/image';
+import {Divider, Image, Card, Container, Segment} from 'semantic-ui-react';
 import styles from './body.module.css';
 
 class Main extends React.Component {
@@ -28,8 +29,8 @@ class Main extends React.Component {
                 </Segment>
                 <Segment>
                   <Image
-                    size="medium"
-                    src="/images/roozbeh-eslami-YlVjrBkfXt8-unsplash.jpg"
+                    width={300}
+                    src="/static/images/roozbeh-eslami-YlVjrBkfXt8-unsplash.jpg"
                   />
                 </Segment>
                 </Segment.Group>

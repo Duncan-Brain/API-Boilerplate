@@ -16,6 +16,7 @@ module.exports = {
     '/coverage/'
   ],
   transform: {
-    '^.+\\.jsx?$': 'babel-jest',
+    '\\.js$': ['babel-jest', { configFile: './tests/.babelrc.json' }]
   },
+  roots: ['../']
 };
