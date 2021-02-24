@@ -4,7 +4,7 @@ module.exports = {
     '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$': '<rootDir>/__mocks__/fileMock.js',
   },
   setupFiles: [
-    '<rootDir>/tests/setup.js',
+    '<rootDir>/testconfig/setup.js',
   ],
   testMatch: [
     "**/__tests__/**/*.[jt]s?(x)",
@@ -13,11 +13,11 @@ module.exports = {
   testPathIgnorePatterns: [
     '/.next/',
     '/node_modules/',
-    '/tests/',
+    '/testconfig/',
     '/coverage/'
   ],
   transform: {
-    '\\.js$': ['babel-jest', { configFile: './tests/.babelrc.json' }]
+    '\\.js$': ['babel-jest', { configFile: './testconfig/.babelrc.json' }]
   },
   roots: ['../']
 };
