@@ -7,7 +7,7 @@
     "start": "next start",
     "build": "next build",
     "dev": "next dev",
-    "test": "jest --clearCache"
+    "test": "jest"
   },
   "author": "Duncan-Brain",
   "private": true,
