@@ -13,11 +13,6 @@ module.exports = {
     "**/__tests__/**/*.[jt]s?(x)",
     "**/?(*.)+(spec|test).[jt]s?(x)"
   ],
-  testPathIgnorePatterns: [
-    '/.next/',
-    '/node_modules/',
-    '/testconfig/'
-  ],
   transform: {
     '\\.js$': ['babel-jest', { configFile: './testconfig/.babelrc.json' }]
   },
