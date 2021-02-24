@@ -14,7 +14,7 @@ jobs:
       - name: Decrypt File
         run: |
           mkdir $HOME/.kube
-          gpg --quiet --batch --yes --decrypt --passphrase=$DECRYPT_PASSPHRASE --output $HOME/.kube/config-travisci-sa config-travisci-sa.gpg
+          gpg --quiet --batch --yes --decrypt --passphrase= $DECRYPT_PASSPHRASE --output $HOME/.kube/config-travisci-sa config-travisci-sa.gpg
 
       - name: Download Kubectl
         run: |
