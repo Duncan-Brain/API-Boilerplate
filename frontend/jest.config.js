@@ -11,10 +11,8 @@ module.exports = {
     "**/?(*.)+(spec|test).[jt]s?(x)"
   ],
   testPathIgnorePatterns: [
-    '/.next/',
     '/node_modules/',
-    '/testconfig/',
-    '/coverage/'
+    '/testconfig/'
   ],
   transform: {
     '\\.js$': ['babel-jest', { configFile: './testconfig/.babelrc.json' }]
