@@ -7,7 +7,8 @@ module.exports = {
     '<rootDir>/tests/setup.js',
   ],
   testMatch: [
-    '**/?(*.)+(spec|test).[jt]s?(x)',
+    "**/__tests__/**/*.[jt]s?(x)",
+    "**/?(*.)+(spec|test).[jt]s?(x)"
   ],
   testPathIgnorePatterns: [
     '/.next/',
