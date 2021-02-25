@@ -7,6 +7,8 @@ on:
 jobs:
   test-deploy:
     runs-on: ubuntu-latest
+    env:
+      working-directory: ./wkdir
     steps:
       - name: Check Out Repo
         uses: actions/checkout@v2
@@ -28,9 +30,10 @@ jobs:
           kubectl config set-context --current --user=travisci-sa
 
       - name: Build and Test Frontend
+        working-directory: ${{ env.working-directory }}
         run: |
           docker build -t tempimage -f ./frontend/Dockerfile.dev ./frontend
-          docker run tempimage /bin/sh -c "cd $GITHUB_WORKSPACE/app && npm test -- --coverage"
+          docker run tempimage /bin/sh -c "cd $working-directory/app && npm test -- --coverage"
 
       - name: Login to Docker Hub
         uses: docker/login-action@v1
