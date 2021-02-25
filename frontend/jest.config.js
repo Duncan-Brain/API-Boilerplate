@@ -10,13 +10,12 @@ module.exports = {
     '<rootDir>/testconfig/setup.js',
   ],
   testMatch: [
-    "**/__tests__/**/*.[jt]s?(x)",
-    "**/?(*.)+(spec|test).[jt]s?(x)"
+    "<rootDir>/**/?(*.)+(spec|test).[jt]s?(x)"
   ],
   testPathIgnorePatterns: [
-    '/.next/',
-    '/node_modules/',
-    '/testconfig/'
+    '<rootDir>/.next/',
+    '<rootDir>/node_modules/',
+    '<rootDir>/testconfig/'
   ],
   transform: {
     '\\.js$': ['babel-jest', { configFile: './testconfig/.babelrc.json' }]
