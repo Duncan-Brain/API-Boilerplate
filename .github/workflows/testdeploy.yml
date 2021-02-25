@@ -50,7 +50,7 @@ jobs:
           context: ./frontend
           file: ./frontend/Dockerfile.next
           push: true
-          tags: duncanbrain/boiler-api-frontend:latest,duncanbrain/boiler-api-frontend:$GITHUB_SHA
+          tags: duncanbrain/boiler-api-frontend:latest,duncanbrain/boiler-api-frontend:${{ github.sha }}
 
       - name: Image digest
         run: echo ${{ steps.frontend_build.outputs.digest }}
@@ -62,7 +62,7 @@ jobs:
           context: ./api
           file: ./api/Dockerfile
           push: true
-          tags: duncanbrain/boiler-api-api:latest,duncanbrain/boiler-api-api:$GITHUB_SHA
+          tags: duncanbrain/boiler-api-api:latest,duncanbrain/boiler-api-api:${{ github.sha }}
 
       - name: Image digest
         run: echo ${{ steps.api_build.outputs.digest }}
@@ -70,5 +70,5 @@ jobs:
       - name: Deploy to Cluster
         run: |
           kubectl --kubeconfig=$HOME/.kube/config apply -f k8s
-          kubectl --kubeconfig=$HOME/.kube/config set image deployment/frontend-deployment frontend=duncanbrain/boiler-api-frontend:$SHA
-          kubectl --kubeconfig=$HOME/.kube/config set image deployment/api-deployment api=duncanbrain/boiler-api-api:$SHA
+          kubectl --kubeconfig=$HOME/.kube/config set image deployment/frontend-deployment frontend=duncanbrain/boiler-api-frontend:${{ github.sha }}
+          kubectl --kubeconfig=$HOME/.kube/config set image deployment/api-deployment api=duncanbrain/boiler-api-api:${{ github.sha }}
