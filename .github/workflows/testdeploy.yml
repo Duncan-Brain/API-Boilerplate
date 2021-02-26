@@ -1,9 +1,13 @@
 name: Test And Deploy
+
 on:
   push:
     branches:
       - master
-
+env:
+  DOCKER_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
+  DOCKER_TOKEN: ${{ secrets.DOCKER_HUB_TOKEN }}
+  
 jobs:
   test-frontend:
     runs-on: ubuntu-latest
@@ -22,11 +26,8 @@ jobs:
     steps:
       - name: Login To Docker Hub
         uses: docker/login-action@v1
-        env:
-          USER: ${{ secrets.DOCKER_HUB_USERNAME }}
-          TOKEN: ${{ secrets.DOCKER_HUB_TOKEN }}
         with:
-          username: "$USER"
+          username: "$DOCKER_USERNAME"
           password: "$TOKEN"
 
       - name: Setup Docker Buildx
@@ -34,23 +35,19 @@ jobs:
 
       - name: Build Push Frontend Image
         uses: docker/build-push-action@v2
-        env:
-          USER: ${{ secrets.DOCKER_HUB_USERNAME }}
         with:
           context: ./frontend
           file: ./frontend/Dockerfile.next
           push: true
-          tags: "$USER"/boiler-api-frontend:latest,"$USER"/boiler-api-frontend:${{ github.sha }}
+          tags: "$DOCKER_USERNAME"/boiler-api-frontend:latest,"$DOCKER_USERNAME"/boiler-api-frontend:${{ github.sha }}
 
       - name: Build Push API Image
         uses: docker/build-push-action@v2
-        env:
-          USER: ${{ secrets.DOCKER_HUB_USERNAME }}
         with:
           context: ./api
           file: ./api/Dockerfile
           push: true
-          tags: "$USER"/boiler-api-api:latest,"$USER"/boiler-api-api:${{ github.sha }}
+          tags: "$DOCKER_USERNAME"/boiler-api-api:latest,"$DOCKER_USERNAME"/boiler-api-api:${{ github.sha }}
 
   deploy-do-kubernetes:
     needs: [test-frontend, deploy-docker]
@@ -76,9 +73,7 @@ jobs:
         run: kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.44.0/deploy/static/provider/do/deploy.yaml
 
       - name: Deploy App To Cluster
-        env:
-          USER: ${{ secrets.DOCKER_HUB_USERNAME }}
         run: |
           kubectl --kubeconfig=$HOME/.kube/config apply -f k8s
-          kubectl --kubeconfig=$HOME/.kube/config set image deployment/frontend-deployment frontend="$USER"/boiler-api-frontend:${{ github.sha }}
-          kubectl --kubeconfig=$HOME/.kube/config set image deployment/api-deployment api="$USER"/boiler-api-api:${{ github.sha }}
+          kubectl --kubeconfig=$HOME/.kube/config set image deployment/frontend-deployment frontend="$DOCKER_USERNAME"/boiler-api-frontend:${{ github.sha }}
+          kubectl --kubeconfig=$HOME/.kube/config set image deployment/api-deployment api="$DOCKER_USERNAME"/boiler-api-api:${{ github.sha }}
