@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - master
-env:
-  DOCKER_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
 
 jobs:
   test-frontend:
@@ -38,7 +36,7 @@ jobs:
           context: ./frontend
           file: ./frontend/Dockerfile.next
           push: true
-          tags: $DOCKER_USERNAME/boiler-api-frontend:latest,$DOCKER_USERNAME/boiler-api-frontend:${{ github.sha }}
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/boiler-api-frontend:latest,${{ secrets.DOCKER_HUB_USERNAME }}/boiler-api-frontend:${{ github.sha }}
 
       - name: Build Push API Image
         uses: docker/build-push-action@v2
@@ -46,7 +44,7 @@ jobs:
           context: ./api
           file: ./api/Dockerfile
           push: true
-          tags: $DOCKER_USERNAME/boiler-api-api:latest,$DOCKER_USERNAME/boiler-api-api:${{ github.sha }}
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/boiler-api-api:latest,${{ secrets.DOCKER_HUB_USERNAME }}/boiler-api-api:${{ github.sha }}
 
   deploy-do-kubernetes:
     needs: [test-frontend, deploy-docker]
@@ -72,6 +70,8 @@ jobs:
         run: kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.44.0/deploy/static/provider/do/deploy.yaml
 
       - name: Deploy App To Cluster
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
         run: |
           kubectl --kubeconfig=$HOME/.kube/config apply -f k8s
           kubectl --kubeconfig=$HOME/.kube/config set image deployment/frontend-deployment frontend="$DOCKER_USERNAME"/boiler-api-frontend:${{ github.sha }}
