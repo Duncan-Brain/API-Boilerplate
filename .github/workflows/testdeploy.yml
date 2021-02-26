@@ -76,11 +76,18 @@ jobs:
           chmod 600 $HOME/.kube/config
           kubectl config set-context --current --user=travisci-sa
 
-      - name: Install Ingress Nginx On Digital Ocean Cluster
+      - name: Try to Install Ingress Nginx On Digital Ocean Cluster
+        continue-on-error: true
+        id: try-install-nginx
         run: |
           helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
           helm repo update
           helm upgrade --install ingress-nginx ingress-nginx/ingress-nginx --reuse-values
+
+      - name: Try to Upgrade Ingress Nginx On Digital Ocean Cluster
+        if: ${{ steps.try-install-nginx.outcome }} == "failure"
+        run: |
+          helm upgrade --reuse-values ingress-nginx ingress-nginx/ingress-nginx
 
       - name: Deploy App To Cluster
         env:
