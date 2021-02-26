@@ -69,9 +69,6 @@ jobs:
           gpg --quiet --batch --yes --decrypt --passphrase "$PASSPHRASE" --output $HOME/.kube/config config-travisci-sa.gpg
           kubectl config set-context --current --user=travisci-sa
 
-      - name: Install Ingress Nginx On Digital Ocean Cluster
-        run: kubectl --kubeconfig=$HOME/.kube/config apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.44.0/deploy/static/provider/do/deploy.yaml
-
       - name: Deploy App To Cluster
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
