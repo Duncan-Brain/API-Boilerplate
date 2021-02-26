@@ -61,6 +61,12 @@ jobs:
           curl -LO https://dl.k8s.io/release/v1.20.0/bin/linux/amd64/kubectl
           sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 
+      - name: Download Helm
+        run: |
+          curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
+          chmod 700 get_helm.sh
+          ./get_helm.sh
+
       - name: Setup Kubeconfig
         env:
           PASSPHRASE: ${{ secrets.DECRYPT_PASSPHRASE }}
@@ -69,10 +75,16 @@ jobs:
           gpg --quiet --batch --yes --decrypt --passphrase "$PASSPHRASE" --output $HOME/.kube/config config-travisci-sa.gpg
           kubectl config set-context --current --user=travisci-sa
 
+      - name: Install Ingress Nginx On Digital Ocean Cluster
+        run: |
+          helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+          helm repo update
+          helm install ingress-nginx ingress-nginx/ingress-nginx
+
       - name: Deploy App To Cluster
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
         run: |
-          kubectl --kubeconfig=$HOME/.kube/config apply -f k8s
-          kubectl --kubeconfig=$HOME/.kube/config set image deployment/frontend-deployment frontend="$DOCKER_USERNAME"/boiler-api-frontend:${{ github.sha }}
-          kubectl --kubeconfig=$HOME/.kube/config set image deployment/api-deployment api="$DOCKER_USERNAME"/boiler-api-api:${{ github.sha }}
+          kubectl apply -f k8s
+          kubectl set image deployment/frontend-deployment frontend="$DOCKER_USERNAME"/boiler-api-frontend:${{ github.sha }}
+          kubectl set image deployment/api-deployment api="$DOCKER_USERNAME"/boiler-api-api:${{ github.sha }}
