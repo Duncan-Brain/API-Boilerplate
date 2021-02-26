@@ -73,6 +73,7 @@ jobs:
         run: |
           mkdir $HOME/.kube
           gpg --quiet --batch --yes --decrypt --passphrase "$PASSPHRASE" --output $HOME/.kube/config config-travisci-sa.gpg
+          chmod u=rw $HOME/.kube/config 
           kubectl config set-context --current --user=travisci-sa
 
       - name: Install Ingress Nginx On Digital Ocean Cluster
@@ -85,6 +86,6 @@ jobs:
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
         run: |
-          kubectl apply -f k8s
-          kubectl set image deployment/frontend-deployment frontend="$DOCKER_USERNAME"/boiler-api-frontend:${{ github.sha }}
-          kubectl set image deployment/api-deployment api="$DOCKER_USERNAME"/boiler-api-api:${{ github.sha }}
+          kubectl --kubeconfig=$HOME/.kube/config apply -f k8s
+          kubectl --kubeconfig=$HOME/.kube/config set image deployment/frontend-deployment frontend="$DOCKER_USERNAME"/boiler-api-frontend:${{ github.sha }}
+          kubectl --kubeconfig=$HOME/.kube/config set image deployment/api-deployment api="$DOCKER_USERNAME"/boiler-api-api:${{ github.sha }}
