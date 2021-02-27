@@ -74,11 +74,18 @@ jobs:
           mkdir $HOME/.kube
           gpg --quiet --batch --yes --decrypt --passphrase "$PASSPHRASE" --output $HOME/.kube/config github-actions-sa.gpg
           chmod 600 $HOME/.kube/config
+          export KUBECONFIG=$KUBECONFIG:$HOME/.kube/config
           kubectl config set-context --current --user=travisci-sa
 
+      - name: Add Docker Secret
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
+          DOCKER_TOKEN: ${{ secrets.DOCKER_HUB_TOKEN }}
+          DOCKER_EMAIL: ${{ secrets.DOCKER_HUB_EMAIL }}
+        run: |
+          kubectl create secret docker-registry regcred --docker-server=https://index.docker.io/v2/ --docker-username="$DOCKER_USERNAME" --docker-password="$DOCKER_TOKEN" --docker-email="$DOCKER_EMAIL"
+
       - name: Try to Install Ingress Nginx On Digital Ocean Cluster
-        continue-on-error: true
-        id: try-install-nginx
         run: |
           helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
           helm repo update
