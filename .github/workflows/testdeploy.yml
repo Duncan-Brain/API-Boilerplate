@@ -72,7 +72,7 @@ jobs:
           PASSPHRASE: ${{ secrets.DECRYPT_PASSPHRASE }}
         run: |
           mkdir $HOME/.kube
-          gpg --quiet --batch --yes --decrypt --passphrase "$PASSPHRASE" --output $HOME/.kube/config config-travisci-sa.gpg
+          gpg --quiet --batch --yes --decrypt --passphrase "$PASSPHRASE" --output $HOME/.kube/config github-actions-sa.gpg
           chmod 600 $HOME/.kube/config
           kubectl config set-context --current --user=travisci-sa
 
@@ -82,12 +82,7 @@ jobs:
         run: |
           helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
           helm repo update
-          helm upgrade --install ingress-nginx ingress-nginx/ingress-nginx --reuse-values
-
-      - name: Try to Upgrade Ingress Nginx On Digital Ocean Cluster
-        if: ${{ steps.try-install-nginx.outcome }} == "failure"
-        run: |
-          helm upgrade --reuse-values ingress-nginx ingress-nginx/ingress-nginx
+          helm upgrade --install ingress-nginx ingress-nginx/ingress-nginx
 
       - name: Deploy App To Cluster
         env:
