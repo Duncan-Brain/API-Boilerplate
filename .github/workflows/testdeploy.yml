@@ -82,7 +82,7 @@ jobs:
           DOCKER_TOKEN: ${{ secrets.DOCKER_HUB_TOKEN }}
           DOCKER_EMAIL: ${{ secrets.DOCKER_HUB_EMAIL }}
         run: |
-          kubectl --kubeconfig=$HOME/.kube/config create secret docker-registry regcred --docker-server=https://index.docker.io/v2/ --docker-username="$DOCKER_USERNAME" --docker-password="$DOCKER_TOKEN" --docker-email="$DOCKER_EMAIL" --dry-run=true -o yaml | kubectl apply -f -
+          kubectl create secret docker-registry regcred --docker-server=https://index.docker.io/v2/ --docker-username="$DOCKER_USERNAME" --docker-password="$DOCKER_TOKEN" --docker-email="$DOCKER_EMAIL" --dry-run=true -o yaml | kubectl apply -f -
 
       - name: Try to Install Ingress Nginx On Digital Ocean Cluster
         run: |
@@ -94,6 +94,6 @@ jobs:
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
         run: |
-          kubectl --kubeconfig=$HOME/.kube/config apply -f k8s
-          kubectl --kubeconfig=$HOME/.kube/config set image deployment/frontend-deployment frontend="$DOCKER_USERNAME"/boiler-api-frontend:${{ github.sha }}
-          kubectl --kubeconfig=$HOME/.kube/config set image deployment/api-deployment api="$DOCKER_USERNAME"/boiler-api-api:${{ github.sha }}
+          kubectl apply -f k8s
+          kubectl set image deployment/frontend-deployment frontend="$DOCKER_USERNAME"/boiler-api-frontend:${{ github.sha }}
+          kubectl set image deployment/api-deployment api="$DOCKER_USERNAME"/boiler-api-api:${{ github.sha }}
