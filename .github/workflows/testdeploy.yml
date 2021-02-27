@@ -73,7 +73,6 @@ jobs:
         run: |
           mkdir $HOME/.kube
           gpg --quiet --batch --yes --decrypt --passphrase "$PASSPHRASE" --output $HOME/.kube/config github-actions-sa.gpg
-          chmod 600 $HOME/.kube/config
           export KUBECONFIG=$KUBECONFIG:$HOME/.kube/config
           kubectl config set-context --current --user=travisci-sa
 
