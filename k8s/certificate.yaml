@@ -5,8 +5,8 @@ metadata:
 spec:
   secretName: api-boilerplate-crt-secret
   dnsNames:
-  - api-boilerplate.brainenterprise.ca
-  - www.api-boilerplate.brainenterprise.ca
+    - api-boilerplate.brainenterprise.ca
+    - www.api-boilerplate.brainenterprise.ca
   issuerRef:
     name: letsencrypt-prod
     # We can reference ClusterIssuers by changing the kind here.
@@ -14,3 +14,10 @@ spec:
     kind: Issuer
     group: cert-manager.io
   commonName: api-boilerplate.brainenterprise.ca
+  acme:
+    config:
+      - http01:
+          ingressClass: nginx
+        domains:
+          - api-boilerplate.brainenterprise.ca
+          - www.api-boilerplate.brainenterprise.ca
