@@ -14,10 +14,3 @@ spec:
     kind: Issuer
     group: cert-manager.io
   commonName: api-boilerplate.brainenterprise.ca
-  acme:
-    config:
-      - http01:
-          ingressClass: nginx
-        domains:
-          - api-boilerplate.brainenterprise.ca
-          - www.api-boilerplate.brainenterprise.ca
