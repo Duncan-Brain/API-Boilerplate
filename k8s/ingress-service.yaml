@@ -16,7 +16,25 @@ spec:
       - www.api-boilerplate.brainenterprise.ca
     secretName: api-boilerplate-crt-secret
   rules:
-    - http:
+    - host: api-boilerplate.brainenterprise.ca
+      http:
+        paths:
+          - path: /?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: frontend-cluster-ip-service
+                port:
+                  number: 3000
+          - path: /api/?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: api-cluster-ip-service
+                port:
+                  number: 5000
+    - host: www.api-boilerplate.brainenterprise.ca
+      http:
         paths:
           - path: /?(.*)
             pathType: Prefix
