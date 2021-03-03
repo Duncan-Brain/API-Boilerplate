@@ -72,7 +72,7 @@ gpg --symmetric --cipher-algo AES256 github-actions-kubeconfig
 
 18. Get the endpoint \<IP_address> from your ingress-nginx-controller or Load Balancer
 
-19. Add A Records to your Domain name service pointing to the \<IP_address>. My example uses subdomains api-boilerplate.\<DOMAIN>.com www.api-boilerplate. \<DOMAIN>.com.
+19. Add A Records to your Domain name service pointing to the \<IP_address>. My example uses subdomains `api-boilerplate.<DOMAIN>.com` and `www.api-boilerplate.<DOMAIN>.com`.
 
 20. Apply the certificate.yaml to generate a certificate request using kubectl.
 ```kubectl apply -f k8s/certificates/certificate.yaml```
