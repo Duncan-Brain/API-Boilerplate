@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: frontend-deployment
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       component: web
@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: duncanbrain/boiler-api-frontend
+          image: <DOCKER_USERNAME>/boiler-api-frontend
           ports:
             - containerPort: 3000
       imagePullSecrets:

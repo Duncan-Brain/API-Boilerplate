@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: api-deployment
 spec:
-  replicas: 3
+  replicas: 2
   selector:
     matchLabels:
       component: api
@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: api
-          image: duncanbrain/boiler-api-api
+          image: <DOCKER_USERNAME>/boiler-api-api
           ports:
             - containerPort: 5000
       imagePullSecrets:

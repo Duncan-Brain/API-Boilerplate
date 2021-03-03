@@ -5,10 +5,10 @@ metadata:
 spec:
   secretName: api-boilerplate-crt-secret
   dnsNames:
-    - api-boilerplate.brainenterprise.ca
-    - www.api-boilerplate.brainenterprise.ca
+    - api-boilerplate.<DOMAINNAME>.com
+    - www.api-boilerplate.<DOMAINNAME>.com
   issuerRef:
     name: letsencrypt-prod
     kind: ClusterIssuer
     group: cert-manager.io
-  commonName: api-boilerplate.brainenterprise.ca
+  commonName: api-boilerplate.<DOMAINNAME>.com

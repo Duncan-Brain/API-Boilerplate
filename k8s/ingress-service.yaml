@@ -7,16 +7,15 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /$1
     cert-manager.io/issuer: "letsencrypt-prod"
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
-    nginx.ingress.kubernetes.io/from-to-www-redirect: "true"
 
 spec:
   tls:
   - hosts:
-      - api-boilerplate.brainenterprise.ca
-      - www.api-boilerplate.brainenterprise.ca
+      - api-boilerplate.<DOMAINNAME>.com
+      - www.api-boilerplate.<DOMAINNAME>.com
     secretName: api-boilerplate-crt-secret
   rules:
-    - host: api-boilerplate.brainenterprise.ca
+    - host: api-boilerplate.<DOMAINNAME>.com
       http:
         paths:
           - path: /?(.*)
@@ -33,7 +32,7 @@ spec:
                 name: api-cluster-ip-service
                 port:
                   number: 5000
-    - host: www.api-boilerplate.brainenterprise.ca
+    - host: www.api-boilerplate.<DOMAINNAME>.com
       http:
         paths:
           - path: /?(.*)
